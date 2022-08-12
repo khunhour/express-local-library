@@ -7,3 +7,4 @@ An app that stores book data. built using Express Application Generator, Nodejs,
 -   NodeJS
 -   Express
 -   MongoDB
+-   Pug
