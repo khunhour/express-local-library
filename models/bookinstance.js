@@ -25,7 +25,6 @@ BookInstanceSchema.virtual("due_back_formatted").get(function () {
 });
 
 BookInstanceSchema.virtual("due_back_yyyy_mm_dd").get(function () {
-	console.log(DateTime.fromJSDate(this.due_back).toFormat("yyyy-MM-dd"));
 	return DateTime.fromJSDate(this.due_back).toFormat("yyyy-MM-dd");
 });
 
