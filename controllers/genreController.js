@@ -169,10 +169,32 @@ exports.genre_delete_post = (req, res, next) => {
 	);
 };
 
-
 // Display Genre update form on GET.
-exports.genre_update_get = function (req, res) {
-	res.send("NOT IMPLEMENTED: Genre update GET");
+exports.genre_update_get = (req, res, next) => {
+	// Get book, authors and genres for form.
+	async.parallel(
+		{
+			genre(callback) {
+				Genre.findById(req.params.id).exec(callback);
+			},
+		},
+		(err, results) => {
+			if (err) {
+				return next(err);
+			}
+			if (results.genre == null) {
+				// No results.
+				const err = new Error("Genre not found");
+				err.status = 404;
+				return next(err);
+			}
+			// Success.
+			res.render("genre_form", {
+				title: "Update Genre",
+				genre: results.genre,
+			});
+		}
+	);
 };
 
 // Handle Genre update on POST.
