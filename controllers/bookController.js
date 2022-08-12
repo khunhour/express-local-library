@@ -206,7 +206,10 @@ exports.book_delete_get = function (req, res, next) {
 	async.parallel(
 		{
 			book(callback) {
-				Book.findById(req.params.id).exec(callback);
+				Book.findById(req.params.id)
+					.populate("author")
+					.populate("genre")
+					.exec(callback);
 			},
 			books_bookInstances(callback) {
 				BookInstance.find({ book: req.params.id }).exec(callback);
