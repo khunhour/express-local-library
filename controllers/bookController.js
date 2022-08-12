@@ -240,7 +240,7 @@ exports.book_delete_post = (req, res, next) => {
 			book(callback) {
 				Book.findById(req.body.bookid).exec(callback);
 			},
-			books_bookInstance(callback) {
+			books_bookInstances(callback) {
 				BookInstance.find({ book: req.body.bookid }).exec(callback);
 			},
 		},
@@ -258,7 +258,8 @@ exports.book_delete_post = (req, res, next) => {
 				});
 				return;
 			}
-			// Book has no book instaces. Delete object and redirect to the list of books.
+			// Book has no book instances. Delete object and redirect to the list of books.
+			console.log(req.body.bookid);
 			Book.findByIdAndRemove(req.body.bookid, (err) => {
 				if (err) {
 					return next(err);
